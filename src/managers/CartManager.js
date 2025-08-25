@@ -49,5 +49,5 @@ async addProductToCart(cid, pid) {
     return cart;
   }
 
-}
+} 
 module.exports = CartManager;
