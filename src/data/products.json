@@ -1,0 +1,36 @@
+[
+{
+   "id":222,
+   "title":"GOOD GIRL EDP 80 ML",
+   "description":"Good Girl es una fragancia evocativa y sensual que nace de la hermosa contradicción y dualidad eterna de la mujer moderna. Revela tu lado bueno con el resplandor floral del jazmín, desafía tu lado malo con la sensualidad del haba tonka y cacao. Nunca ha sido tan bueno ser mala. Good Girl, una fragancia tan intensa como sensual para la mujer que celebra su lado bueno y libera su lado malo. El frasco está excepcionalmente único y moderno: un stiletto de color azul media noche con tacón dorado, expresa la naturaleza sensual, segura, femenina y poderosa de la mujer que lleva Good Girl.",
+   "price":190,
+   "stock":3,
+   "category":"Perfumes",
+   "thumbnails":"https://tiendacdn.farmashop.com.uy/media/catalog/product/cache/b95c5a80fceba83a019bf329d51e253e/8/1/81073_31.jpg"
+
+},
+
+{
+   "id":333,
+   "title":"BROCHA KABUKI GRANDE",
+   "description":"En versión extragrande está especialmente diseñada para los polvos XXL. Una creación exclusiva con forma redondeada y un tacto aterciopelado para una aplicación suave y generosa en el rostro y el cuerpo, y un resultado de maquillaje ultranatural.Perfecta para realizar retoques durante el día.",
+   "code":777,
+   "price":65,
+   "stock":0,
+   "category":"Accesorios",
+   "thumbnails":"https://www.chanel.com/images//t_one//w_0.55,h_0.55,c_crop/q_auto:good,f_autoplus,fl_lossy,dpr_1.1/w_620/les-pinceaux-de-chanel-kabuki-brush-1pce-packshot-default-138846-8825969999902.jpg"
+
+},
+
+{
+   "id":444,
+   "title":"MASCARA LE VOLUME INTENSE",
+   "description":"Una máscara que ofrece un volumen inmediato desde la primera aplicación. Las pestañas se multiplican, cobran cuerpo y densidad. Revestidas de un color profundo, abren la mirada.La sinergia cepillo-fórmula permite un efecto de volumen intenso• El cepillo, que se ha desarrollado exclusivamente para CHANEL, esculpe el volumen gracias a sus discos superpuestos y orientados para un acabado óptimo.• La fórmula fluida de secado rápido permite crear un volumen a medida.'",
+   "code":356,
+   "price":57,
+   "stock":17,
+   "category":"Mauillaje",
+   "thumbnails":"https://www.chanel.com/images//t_one//w_0.43,h_0.43,c_crop/q_auto:good,f_autoplus,fl_lossy,dpr_1.1/w_620/le-volume-ultra-noir-de-chanel-mascara-90-noir-intense-6g-packshot-default-191310-8819743752222.jpg"
+
+}
+]
