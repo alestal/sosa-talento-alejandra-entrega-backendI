@@ -2,6 +2,9 @@
 
 const io = newServer(server);
 
+
+
+
 io.on("conection",(socket) => {
     console.log(`usuarioID:${socket.id}Conectado`);
 });
@@ -13,8 +16,6 @@ io.on("conection",(socket) => {
     await manager.deleteProduct(id);
     io.emit('update-products', await manager.getAll());
   });
-
-
 
 
 module.exports = server;

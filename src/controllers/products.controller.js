@@ -39,7 +39,7 @@ const updateProduct = async (req, res) => {
     if (!updated) {
       return res.status(404).json({ error: 'No se ha encontrado el producto' });
     }
-    res.status(200).json({ message: 'se ha actualizado el producto', product: updated });
+    res.status(200).json({ message: 'se ha actualizado el producto correctamente', product: updated });
   } catch (error) {
     res.status(500).json({ error: 'Error al actualizar el producto', details: error.message });
   }
