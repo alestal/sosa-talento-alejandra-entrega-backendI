@@ -1,0 +1,16 @@
+crear una vista que contenga una lista de todos los productos agregados hasta el momento
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>BIENVENIDOS A PERFUMERIA OLIVIA</title>
+</head>
+<body>
+  <h1>Productos</h1>
+  <ul>
+    {{#each products}}
+      <li><strong>{{this.title}}</strong> - ${{this.price}}</li>
+    {{/each}}
+  </ul>
+</body>
+</html>
