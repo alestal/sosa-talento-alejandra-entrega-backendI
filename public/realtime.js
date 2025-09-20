@@ -1,4 +1,4 @@
-const socket = io();
+/*const socket = io();
 
 
 const form = document.getElementById('productForm');
@@ -29,3 +29,4 @@ socket.on('productList', (products) => {
     list.appendChild(li);
   });
 });
+*/

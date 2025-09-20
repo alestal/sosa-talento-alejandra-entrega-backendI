@@ -6,7 +6,7 @@
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-  <h1>Perfumeria Olivia en tiempo real</h1>
+  <h1>Perfumeria Olivia realTime</h1>
 
   <ul id="productList">
     {{#each products}}
@@ -30,11 +30,11 @@
   <script>
     const socket = io();
 
-   //recibe lista
+   /*recibe la lista de productos*/
     socket.on('productList', products => {
       const list = document.getElementById('productList');
       list.innerHTML = '';
-      /*products.then ? products.then(render) : render(products);*/
+      
       render(products);
 
 
@@ -48,7 +48,7 @@
       }
     });
 
-    // Enviar nuevo producto
+   /*nuevo producto*/
     document.getElementById('addProductForm').addEventListener('submit', e => {
       e.preventDefault();
       const form = e.target;
@@ -65,8 +65,7 @@
 
       form.reset();
     });
-
-    // Eliminar producto
+/*eliminar un producto*/
     function deleteProduct(id) {
       socket.emit('deleteProduct', id);
     }

@@ -1,3 +1,11 @@
 <div>
-    <h1>BIENVENIDOS A PERFUMERIA OLIVIA</h1>
+  <h1>BIENVENIDOS A PERFUMERÍA OLIVIA</h1>
+
+  {{#each products}}
+    <div class="card">
+      <h2>{{this.title}}</h2>
+      <p>Precio: ${{this.price}}</p>
+      <img src="{{this.image}}" alt="{{this.title}}" />
+    </div>
+  {{/each}}
 </div>

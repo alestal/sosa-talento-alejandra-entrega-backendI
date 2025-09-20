@@ -1,10 +1,10 @@
 const path = require("path");
 const express = require("express");
+const { paths, PORT } = require('./src/config/config');
 const http = require("http");
 const socketio = require("socket.io");
 const handlebars = require("express-handlebars");
 const logger = require("morgan");
-const { PORT, paths } = require("./src/config/config");
 
 
 const ProductManager = require("./src/managers/ProductManager");
@@ -14,7 +14,7 @@ const cartscontroller = require("./src/controllers/carts.controller");
 const productsRouter = require ("./src/routes/products.routes")
 const cartsRouter = require ("./src/routes/carts.routes");
 const viewsRouter = require("./src/routes/views.routes");
-/*const { Server } = require("http"); comentado 14.26 revisar*/
+
 
 const app = express();
 const server = http.createServer(app);
@@ -28,8 +28,7 @@ app.use(logger("dev"));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-
-app.use("/uploads", express.static(paths.upload));
+app.use(express.static(paths.public));
 
 
 /*HANDLEBAR*/
@@ -69,20 +68,15 @@ const upload = multer({storage:storage});
  
 
  /*rutas*/ 
+ app.use("/", viewsRouter);
 app.use("/api/products", productsRouter)
 app.use("/api/carts",cartsRouter)
-app.use("/", viewsRouter);
+
 
 const productManager = new ProductManager(path.join(__dirname, "src/data/products.json"));
 
 
-/*socket io*/
-/*module.exports = {io};
-socket.on('delete-product', async (id) => {
-    await manager.deleteProduct(id);
-    io.emit('update-products', await manager.getProducts());
-  });*/
-
+/*socket*/
 io.on("connection", (socket) => {
   console.log("Nuevo cliente conectado");
 
@@ -98,7 +92,6 @@ io.on("connection", (socket) => {
 app.listen(PORT, () => {
   console.log(` app listening on http://localhost:${PORT}`)
 })
-
 
 
 
