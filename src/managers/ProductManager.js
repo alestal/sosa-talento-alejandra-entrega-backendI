@@ -46,13 +46,14 @@ async writeFile(data) {
   }
 
   async addProduct(product) {
-    const products = await this.readFile();
-    const newId = products.length > 0 ? products[products.length - 1].id + 1 : 1;
-    const newProduct = { id: newId, ...product };
-    products.push(newProduct);
-    await this.writeFile(products);
-    return newProduct;
-  }
+  const products = await this.readFile();
+  const newId = this.generateId(); 
+  const newProduct = { id: newId, ...product };
+  products.push(newProduct);
+  await this.writeFile(products);
+  return newProduct;
+}
+
 
   async updateProduct(id, updates) {
     const products = await this.readFile();

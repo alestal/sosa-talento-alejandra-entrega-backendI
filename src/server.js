@@ -10,11 +10,11 @@ io.on("conection",(socket) => {
 });
 
 
-  socket.emit('update-products', await manager.getAll());
+  socket.emit('update-products', await manager.getProducts());
   socket.on('delete-product', async (id) => {
  
     await manager.deleteProduct(id);
-    io.emit('update-products', await manager.getAll());
+    io.emit('update-products', await manager.getProducts());
   });
 
 

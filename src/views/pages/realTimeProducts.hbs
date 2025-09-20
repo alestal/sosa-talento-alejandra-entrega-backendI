@@ -30,11 +30,13 @@
   <script>
     const socket = io();
 
-    // Recibir lista y renderizar
+   //recibe lista
     socket.on('productList', products => {
       const list = document.getElementById('productList');
       list.innerHTML = '';
-      products.then ? products.then(render) : render(products);
+      /*products.then ? products.then(render) : render(products);*/
+      render(products);
+
 
       function render(products) {
         list.innerHTML = products.map(p => `
