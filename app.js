@@ -86,12 +86,20 @@ io.on("connection", (socket) => {
     io.emit("update-products", products);
   });
 
+
+socket.on("add-product", async (newProduct) => {
+    await productManager.addProduct(newProduct);
+    const updatedProducts = await productManager.getProducts();
+    io.emit("update-products", updatedProducts);
+  });
 });
+
 
 
 app.listen(PORT, () => {
   console.log(` app listening on http://localhost:${PORT}`)
 })
+
 
 
 

@@ -4,35 +4,32 @@ const path = './data/products.json';
 
 
 class ProductManager {
-constructor(filepath){
+  constructor(filepath) {
     this.filepath = filepath;
-}
+  }
 
   async readFile() {
     try {
       const data = await fs.readFile(this.filepath, 'utf-8');
       return JSON.parse(data);
-    } catch (error){
+    } catch (error) {
       if (error.code === "ENOENT") {
-        await this.saveFile([]);
-         return [];
+        await this.writeFile([]);
+        return [];
       }
       throw error;
     }
   }
-  
-  async saveFile(products) {
-    await fs.writeFile(this.filepath, JSON.stringify(products, null, 2), "utf8");
+
+  async writeFile(data) {
+    try {
+      await fs.writeFile(this.filepath, JSON.stringify(data, null, 2));
+    } catch (error) {
+      console.error("Archivo con error:", error);
+      throw error;
+    }
   }
 
-async writeFile(data) {
-    try {
-        await fs.writeFile(this.filepath, JSON.stringify(data, null, 2));
-    } catch (error) {
-        console.error("Archivo con error:", error);
-        throw error;
-    }
-}     
   async getProducts() {
     return await this.readFile();
   }
@@ -41,19 +38,19 @@ async writeFile(data) {
     const products = await this.readFile();
     return products.find(p => p.id === id);
   }
-   generateId() {
+
+  generateId() {
     return crypto.randomUUID();
   }
 
   async addProduct(product) {
-  const products = await this.readFile();
-  const newId = this.generateId(); 
-  const newProduct = { id: newId, ...product };
-  products.push(newProduct);
-  await this.writeFile(products);
-  return newProduct;
-}
-
+    const products = await this.readFile();
+    const newId = this.generateId();
+    const newProduct = { id: newId, ...product };
+    products.push(newProduct);
+    await this.writeFile(products);
+    return newProduct;
+  }
 
   async updateProduct(id, updates) {
     const products = await this.readFile();
@@ -69,11 +66,12 @@ async writeFile(data) {
     const products = await this.readFile();
     const filtered = products.filter(p => p.id != id);
     if (filtered.length === products.length) {
-  throw new Error("No se enceuentra el producto");
-}
-await this.writeFile(filtered);
-return true;
+      throw new Error("No se encuentra el producto");
+    }
+    await this.writeFile(filtered);
+    return true;
   }
 }
 
 module.exports = ProductManager;
+
