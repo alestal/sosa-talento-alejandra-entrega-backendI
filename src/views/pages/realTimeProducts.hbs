@@ -3,53 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <title>Productos en tiempo real</title>
+  <!-- Cargar socket.io del servidor -->
   <script src="/socket.io/socket.io.js"></script>
+ 
 </head>
 <body>
-  <h1>Perfumeria Olivia realTime</h1>
+
+  <h1>Perfumería Olivia</h1>
 
   <ul id="productList">
     {{#each products}}
       <li data-id="{{this.id}}">
-        <strong>{{this.title}}</strong> - {{this.price}}
+        <strong>{{this.title}}</strong> - ${{this.price}}
         <button onclick="deleteProduct('{{this.id}}')">Eliminar</button>
       </li>
     {{/each}}
   </ul>
 
-  <h2>Agregar producto</h2>
+  <h2>Agregar nuevo producto</h2>
   <form id="addProductForm">
     <input name="title" placeholder="Título" required />
     <input name="description" placeholder="Descripción" required />
-     <input name="category" placeholder="Categotria" required />
-     <input name="price" placeholder="Precio" type="number" step="0.01" required />
-    <input name="code" placeholder="Código" required />
-    <input name="stock" placeholder="Stock" type="number" required />
+ <input name="category" placeholder="Categoria" required />
+   <input name="price" placeholder="Precio" type="number" step="0.01" required />
+  <input name="stock" placeholder="Stock" type="number" required />
     <button type="submit">Agregar</button>
   </form>
 
   <script>
     const socket = io();
 
-   /*recibe la lista de productos*/
-    socket.on('productList', products => {
+    /* lista de productos*/
+    function render(products) {
       const list = document.getElementById('productList');
-      list.innerHTML = '';
-      
+      list.innerHTML = products.map(p => `
+        <li data-id="${p.id}">
+          <strong>${p.title}</strong> - $${p.price}
+          <button onclick="deleteProduct('${p.id}')">Eliminar</button>
+        </li>
+      `).join('');
+    }
+
+    /* lista de productos desde el servidor*/
+    socket.on('productList', (products) => {
       render(products);
-
-
-      function render(products) {
-        list.innerHTML = products.map(p => `
-          <li data-id="${p.id}">
-            <strong>${p.title}</strong> - $${p.price}
-            <button onclick="deleteProduct('${p.id}')">Eliminar</button>
-          </li>
-        `).join('');
-      }
     });
 
-   /*nuevo producto*/
+    /* nuevo producto*/
     document.getElementById('addProductForm').addEventListener('submit', e => {
       e.preventDefault();
       const form = e.target;
@@ -57,27 +57,23 @@
       const newProduct = {
         title: form.title.value,
         description: form.description.value,
+        category: form.category.value,
         price: parseFloat(form.price.value),
-        code: form.code.value,
-        stock: parseInt(form.stock.value),
+        stock: parseInt(form.stock.value)
       };
 
       socket.emit('addProduct', newProduct);
-
       form.reset();
     });
 
-
-/*eliminar un producto*/
+    /* Eliminar producto*/
     function deleteProduct(id) {
       socket.emit('deleteProduct', id);
     }
 
+    /* errores desde el servidor*/
     socket.on('error', msg => alert('Error: ' + msg));
-
-
   </script>
 
 </body>
-
 </html>

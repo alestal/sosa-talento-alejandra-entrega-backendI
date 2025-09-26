@@ -76,29 +76,39 @@ app.use("/api/carts",cartsRouter)
 const productManager = new ProductManager(path.join(__dirname, "src/data/products.json"));
 
 
+
 /*socket*/
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log("Nuevo cliente conectado");
 
-  socket.on("delete-product", async (id) => {
+  /* Enviar lista de productos para el cliente*/
+  const products = await productManager.getProducts();
+  socket.emit("productList", products);
+  
+/*eliminar producto*/
+  socket.on("deleteProduct", async (id) => {
     await productManager.deleteProduct(id);
-    const products = await productManager.getProducts();
-    io.emit("update-products", products);
+    const updatedProducts = await productManager.getProducts();
+    io.emit("productList", updatedProducts);
   });
 
-
-socket.on("add-product", async (newProduct) => {
+  /*agregar producto*/
+  socket.on("addProduct", async (newProduct) => {
     await productManager.addProduct(newProduct);
     const updatedProducts = await productManager.getProducts();
-    io.emit("update-products", updatedProducts);
+    io.emit("productList", updatedProducts);
   });
 });
 
-
-
+/*
 app.listen(PORT, () => {
   console.log(` app listening on http://localhost:${PORT}`)
-})
+})*/
+
+server.listen(PORT, () => {
+  console.log(`🚀 Servidor en http://localhost:${PORT}`);
+});
+
 
 
 

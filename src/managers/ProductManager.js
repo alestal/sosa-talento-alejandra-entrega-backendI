@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const crypto = require('crypto');
-const path = './data/products.json';
+/*const path = './data/products.json';*/
 
 
 class ProductManager {
@@ -54,7 +54,8 @@ class ProductManager {
 
   async updateProduct(id, updates) {
     const products = await this.readFile();
-    const index = products.findIndex(p => p.id == id);
+    const index = products.findIndex(p => p.id === id
+);
     if (index === -1) return null;
     const updatedProduct = { ...products[index], ...updates, id: products[index].id };
     products[index] = updatedProduct;

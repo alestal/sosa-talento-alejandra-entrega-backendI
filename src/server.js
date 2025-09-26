@@ -1,24 +1,28 @@
-/*config de io*/
-
 const { Server } = require("socket.io");
 const server = require("http").createServer(app); 
-
+const ProductService = require("./services/products.services");/*revisar*/
 const io = new Server(server);
+
+const ProductManager = require('../managers/ProductManager');
+const path = require("path");
+const manager = new ProductManager(path.join(__dirname, "../data/products.json"));
 
 io.on("connection", async (socket) => {
   console.log(`usuarioID: ${socket.id} conectado`);
 
-  socket.emit("update-products", await manager.getProducts());
+  /* productos actuales*/
+  socket.emit("productList", await manager.getProducts()); 
 
-  socket.on("delete-product", async (id) => {
+  /* elimina un producto*/
+  socket.on("deleteProduct", async (id) => {               
     await manager.deleteProduct(id);
-    io.emit("update-products", await manager.getProducts());
+    io.emit("productList", await manager.getProducts());   
   });
 
- 
-  socket.on("add-product", async (newProduct) => {
+  /* agrega un producto*/
+  socket.on("addProduct", async (newProduct) => {          
     await manager.addProduct(newProduct);
-    io.emit("update-products", await manager.getProducts());
+    io.emit("productList", await manager.getProducts());  
   });
 });
 

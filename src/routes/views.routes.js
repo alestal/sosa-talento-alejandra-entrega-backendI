@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require("path");
 const ProductManager = require('../managers/ProductManager');
 
-const productsFilePath = path.join(__dirname, "..", "data", "products.json");
+const productsFilePath = path.join(__dirname, "../data/products.json");
 const manager = new ProductManager(productsFilePath);
 
 /*pag de home*/
@@ -12,10 +12,12 @@ router.get('/', async (req, res) => {
     const products = await manager.getProducts();
     res.render('pages/home', { products });
   } catch (error) {
-    console.error("Error al renderizar /:", error);
+    console.error("Error", error);
     res.status(500).send("Error al cargar la página de inicio.");
   }
 });
+
+
 /* pag realtime*/
 router.get('/realtimeproducts', async (req, res) => {
   try {
