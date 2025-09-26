@@ -4,7 +4,7 @@ const ProductManager = require("../managers/ProductManager");
 const manager = new ProductManager(path.join(__dirname, "../data/products.json"));
 
 function validateProductFields(product) {
-  const requiredFields = ['title', 'description', 'category', 'price', 'stock'];
+  const requiredFields = ['title', 'description', 'category', "code",'price', 'stock'];
 
   const missingFields = requiredFields.filter(field =>
     product[field] === undefined || product[field] === null || product[field] === ''

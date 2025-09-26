@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>BIENVENIDOS A PERFUMERIA OLIVIA</title>
-</head>
-<body>
-  <h1>Productos</h1>
-  <ul>
-    {{#each products}}
-      <li><strong>{{this.title}}</strong> - ${{this.price}}</li>
-    {{/each}}
-  </ul>
-</body>
-</html>
+<h1>Bienvenidos a Perfumería Olivia</h1>
+<ul>
+  {{#each products}}
+    <li>
+      <strong>{{this.title}}</strong> - ${{this.price}}
+      <br />
+      <em>{{this.description}}</em>
+      <br />
+      <small>Categoría: {{this.category}}</small>
+      <br />
+      <img src="{{this.thumbnails}}" alt="{{this.title}}" />
+    </li>
+    <hr />
+  {{else}}
+    <li>No hay productos.</li>
+  {{/each}}
+</ul>

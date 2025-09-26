@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const crypto = require('crypto');
-/*const path = './data/products.json';*/
+const path = './data/products.json';
 
 
 class ProductManager {

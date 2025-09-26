@@ -1,6 +1,6 @@
 const { Server } = require("socket.io");
 const server = require("http").createServer(app); 
-const ProductService = require("./services/products.services");/*revisar*/
+const ProductService = require("./services/products.services");
 const io = new Server(server);
 
 const ProductManager = require('../managers/ProductManager');

@@ -48,6 +48,7 @@ app.set("views", paths.views);
 
 
 
+
 /*MULTER
 const multer = require("multer");
 
@@ -106,12 +107,8 @@ app.listen(PORT, () => {
 })*/
 
 server.listen(PORT, () => {
-  console.log(`🚀 Servidor en http://localhost:${PORT}`);
+  console.log(` Servidor en http://localhost:${PORT}`);
 });
-
-
-
-
 
 
 

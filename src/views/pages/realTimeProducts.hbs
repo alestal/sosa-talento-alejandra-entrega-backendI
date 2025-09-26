@@ -22,9 +22,10 @@
 
   <h2>Agregar nuevo producto</h2>
   <form id="addProductForm">
-    <input name="title" placeholder="Título" required />
+    <input name="title" placeholder="Nombre" required />
     <input name="description" placeholder="Descripción" required />
  <input name="category" placeholder="Categoria" required />
+  <input name="code" placeholder="Código" required /> 
    <input name="price" placeholder="Precio" type="number" step="0.01" required />
   <input name="stock" placeholder="Stock" type="number" required />
     <button type="submit">Agregar</button>
@@ -58,6 +59,7 @@
         title: form.title.value,
         description: form.description.value,
         category: form.category.value,
+         code: form.code.value,
         price: parseFloat(form.price.value),
         stock: parseInt(form.stock.value)
       };

@@ -7,15 +7,16 @@ const productsFilePath = path.join(__dirname, "../data/products.json");
 const manager = new ProductManager(productsFilePath);
 
 /*pag de home*/
-router.get('/', async (req, res) => {
+router.get("/home", async (req, res) => {
   try {
     const products = await manager.getProducts();
-    res.render('pages/home', { products });
+    res.render("pages/home", { products });
   } catch (error) {
     console.error("Error", error);
     res.status(500).send("Error al cargar la página de inicio.");
   }
 });
+
 
 
 /* pag realtime*/
