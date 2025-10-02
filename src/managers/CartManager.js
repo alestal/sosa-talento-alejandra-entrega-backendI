@@ -59,3 +59,81 @@ class CartManager {
 
 module.exports = CartManager;
 
+
+/*para entrega final 
+const Cart = require('../models/cart.model');
+const Product = require('../models/product.model');
+
+class CartManager {
+  async createCart() {
+    const newCart = await Cart.create({ products: [] });
+    return newCart;
+  }
+
+  async getById(cid) {
+    return await Cart.findById(cid).populate('products.product');
+  }
+
+  async addProductToCart(cid, pid) {
+    const cart = await Cart.findById(cid);
+    if (!cart) return null;
+
+    const existingProduct = cart.products.find(p => p.product.toString() === pid);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cart.products.push({ product: pid, quantity: 1 });
+    }
+
+    await cart.save();
+    return cart;
+  }
+
+  async deleteProductFromCart(cid, pid) {
+    const cart = await Cart.findById(cid);
+    if (!cart) return null;
+
+    cart.products = cart.products.filter(p => p.product.toString() !== pid);
+    await cart.save();
+    return cart;
+  }
+
+  async updateCartProducts(cid, products) {
+    const cart = await Cart.findById(cid);
+    if (!cart) return null;
+
+    // Validación opcional: verificar que todos los productos existan en BD
+    cart.products = products.map(p => ({
+      product: p.product,
+      quantity: p.quantity
+    }));
+
+    await cart.save();
+    return cart;
+  }
+
+  async updateProductQuantity(cid, pid, quantity) {
+    const cart = await Cart.findById(cid);
+    if (!cart) return null;
+
+    const prod = cart.products.find(p => p.product.toString() === pid);
+    if (!prod) return null;
+
+    prod.quantity = quantity;
+    await cart.save();
+    return cart;
+  }
+
+  async clearCart(cid) {
+    const cart = await Cart.findById(cid);
+    if (!cart) return null;
+
+    cart.products = [];
+    await cart.save();
+    return cart;
+  }
+}
+
+module.exports = CartManager;
+*/

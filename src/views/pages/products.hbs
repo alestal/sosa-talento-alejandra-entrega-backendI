@@ -1,0 +1,105 @@
+<h1 style="text-align: center;">Productos</h1>
+
+<form method="GET" action="/products" style="text-align: center; margin-bottom: 20px;">
+  <label for="category">Categoría:</label>
+  <select name="query" id="category">
+    <option value="">Todas</option>
+    {{#each categories}}
+      <option value="{{this}}" {{#if (eq ../query this)}}selected{{/if}}>{{this}}</option>
+    {{/each}}
+  </select>
+
+  <label for="sort">Ordenar por precio:</label>
+  <select name="sort" id="sort">
+    <option value="" {{#unless sort}}selected{{/unless}}>Sin ordenar</option>
+    <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Ascendente</option>
+    <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Descendente</option>
+  </select>
+
+  <button type="submit">Filtrar</button>
+</form>
+
+{{#if products.length}}
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    {{#each products}}
+      <div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: 250px; text-align: center;">
+        <h3>{{this.title}}</h3>
+
+        {{#if this.thumbnails}}
+          <img src="{{this.thumbnails}}" alt="{{this.title}}" style="width: 100px; height: auto; margin-bottom: 10px;" />
+        {{else}}
+          <div style="width: 100px; height: 100px; background-color: #eee; margin: 0 auto 10px;"></div>
+        {{/if}}
+
+        <p><strong>Precio:</strong> ${{this.price}}</p>
+        <p><strong>Categoría:</strong> {{this.category}}</p>
+
+        <a href="/products/{{this._id}}" style="background-color: #7b3d97; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; display: inline-block; margin-bottom: 8px;">Ver detalles</a>
+
+        <button class="add-to-cart" data-id="{{this._id}}" style="background-color: #7b3d97; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">
+          Agregar al Carrito
+        </button>
+      </div>
+    {{/each}}
+  </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    {{#if hasPrevPage}}
+      <a href="{{prevLink}}" style="margin-right: 15px;">Anterior</a>
+    {{/if}}
+    Página {{page}} de {{totalPages}}
+    {{#if hasNextPage}}
+      <a href="{{nextLink}}" style="margin-left: 15px;">Siguiente </a>
+    {{/if}}
+  </div>
+{{else}}
+  <p style="text-align: center;">No hay productos disponibles.</p>
+{{/if}}
+
+<script>
+
+  (async () => {
+    let cartId = localStorage.getItem('cartId');
+    if (!cartId) {
+      try {
+        const res = await fetch('/api/carts/new', { method: 'POST' });
+        const data = await res.json();
+        if (data.status === 'success') {
+          cartId = data.cartId;
+          localStorage.setItem('cartId', cartId);
+        } else {
+          console.error('Error al crear carrito:', data.message);
+        }
+      } catch (err) {
+        console.error('Error al crear carrito:', err);
+      }
+    }
+    const linkCarrito = document.getElementById('link-carrito');
+    if (linkCarrito && cartId) {
+      linkCarrito.href = `/carts/${cartId}`;
+    }
+  })();
+
+ /*btn agregar agregar*/
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const productId = btn.dataset.id;
+      const cartId = localStorage.getItem('cartId');
+      if (!cartId) {
+        alert('Debes tener un carrito activo para agregar productos.');
+        return;
+      }
+      try {
+        const res = await fetch(`/api/carts/${cartId}/products/${productId}`, { method: 'POST' });
+        const data = await res.json();
+        if (data.status === 'success') {
+          alert('Producto agregado al carrito');
+        } else {
+          alert('Error: ' + data.message);
+        }
+      } catch (error) {
+        alert('Error al agregar producto');
+      }
+    });
+  });
+</script>

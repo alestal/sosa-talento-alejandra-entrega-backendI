@@ -76,3 +76,66 @@ class ProductManager {
 
 module.exports = ProductManager;
 
+
+
+
+
+
+/*para proyecto final 
+const Product = require('../models/product.model');
+
+class ProductManager {
+  // Obtener productos con paginación, filtros y orden
+  async getProducts({ limit = 10, page = 1, sort, query } = {}) {
+    const options = {
+      page: parseInt(page),
+      limit: parseInt(limit),
+      lean: true,
+      sort: sort ? { price: sort === 'asc' ? 1 : -1 } : {}
+    };
+
+    const filter = {};
+
+    if (query) {
+      const queryLower = query.toLowerCase();
+
+      if (['maquillaje', 'perfume', 'accesorios'].includes(queryLower)) {
+        filter.category = queryLower;
+      } else if (queryLower === 'available' || queryLower === 'true') {
+        filter.available = true;
+      } else if (queryLower === 'unavailable' || queryLower === 'false') {
+        filter.available = false;
+      } else {
+        filter.$or = [
+          { title: { $regex: query, $options: 'i' } },
+          { description: { $regex: query, $options: 'i' } }
+        ];
+      }
+    }
+
+    return Product.paginate(filter, options);
+  }
+
+  // Obtener producto por id
+  async getProductById(id) {
+    return Product.findById(id).lean();
+  }
+
+  // Agregar producto nuevo
+  async addProduct(productData) {
+    const product = new Product(productData);
+    return product.save();
+  }
+
+  // Actualizar producto por id
+  async updateProduct(id, updateData) {
+    return Product.findByIdAndUpdate(id, updateData, { new: true, lean: true });
+  }
+
+  // Eliminar producto por id
+  async deleteProduct(id) {
+    return Product.findByIdAndDelete(id);
+  }
+}
+
+module.exports = ProductManager;*/

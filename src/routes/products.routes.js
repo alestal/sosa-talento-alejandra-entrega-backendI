@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+
+
 const {
   getProducts,
   getProductById,
@@ -8,8 +10,6 @@ const {
   updateProduct,
   deleteProduct
 } = require('../controllers/products.controller');
-
-
 
 router.get('/', getProducts);
 router.get('/:pid', getProductById);

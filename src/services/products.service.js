@@ -1,10 +1,7 @@
-const path = require("path");
-const ProductManager = require("../managers/ProductManager");
-
-const manager = new ProductManager(path.join(__dirname, "../data/products.json"));
+const Product = require("../models/product.model");
 
 function validateProductFields(product) {
-  const requiredFields = ['title', 'description', 'category', "code",'price', 'stock'];
+  const requiredFields = ['title', 'description', 'category', 'code', 'price', 'stock'];
 
   const missingFields = requiredFields.filter(field =>
     product[field] === undefined || product[field] === null || product[field] === ''
@@ -21,21 +18,11 @@ function validateProductFields(product) {
   if (typeof product.stock !== 'number' || isNaN(product.stock)) {
     throw new Error("El stock debe ser un número válido.");
   }
+
+  
+  if (product.thumbnails && typeof product.thumbnails !== 'string') {
+    throw new Error("El campo thumbnails debe ser una cadena de texto.");
+  }
 }
 
-const ProductService = {
-  async getProducts() {
-    return await manager.getProducts();
-  },
-
-  async add(product) {
-    validateProductFields(product);
-    return await manager.addProduct(product);
-  },
-
-  async delete(id) {
-    return await manager.deleteProduct(id);
-  }
-};
-
-module.exports = ProductService;
+module.exports = validateProductFields;

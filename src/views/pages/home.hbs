@@ -1,17 +1,16 @@
-<h1>Bienvenidos a Perfumería Olivia</h1>
-<ul>
-  {{#each products}}
-    <li>
-      <strong>{{this.title}}</strong> - ${{this.price}}
-      <br />
-      <em>{{this.description}}</em>
-      <br />
-      <small>Categoría: {{this.category}}</small>
-      <br />
-      <img src="{{this.thumbnails}}" alt="{{this.title}}" />
-    </li>
-    <hr />
-  {{else}}
-    <li>No hay productos.</li>
-  {{/each}}
-</ul>
+<h1 style="text-align: center;"> Productos</h1>
+
+
+<form method="GET" action="/products">
+  <label for="category">Categoría:</label>
+  <input type="text" name="query" id="category" value="{{query}}" placeholder="Ej: accesorios" />
+
+  <label for="sort">Ordenar por precio:</label>
+  <select name="sort" id="sort">
+    <option value="" {{#unless sort}}selected{{/unless}}>Sin ordenar</option>
+    <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Ascendente</option>
+    <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Descendente</option>
+  </select>
+
+  <button type="submit">Filtrar</button>
+</form>

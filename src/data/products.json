@@ -5,7 +5,7 @@
     "price": 190,
     "stock": 15,
     "category": "Perfumes",
-    "code": "abc",
+    "code": 1000,
     "thumbnails": "https://www.perfumeriatodo.com.uy/images/virtuemart/product/841106181896-1.jpg",
     "description": "Good Girl es una fragancia evocativa y sensual que nace de la hermosa contradicción y dualidad eterna de la mujer moderna. Revela tu lado bueno con el resplandor floral del jazmín, desafía tu lado malo con la sensualidad del haba tonka y cacao. Nunca ha sido tan bueno ser mala. Good Girl, una fragancia tan intensa como sensual para la mujer que celebra su lado bueno y libera su lado malo. El frasco está excepcionalmente único y moderno: un stiletto de color azul media noche con tacón dorado, expresa la naturaleza sensual, segura, femenina y poderosa de la mujer que lleva Good Girl."
   },
@@ -15,7 +15,7 @@
     "price": 65,
     "stock": 7,
     "category": "Accesorios",
-    "code": "def",
+    "code": 1001,
     "thumbnails": "https://www.perfumeriajulia.es/44153-medium_default/petit-pinceau-kabuki.jpg",
     "description": "En versión extragrande está especialmente diseñada para los polvos XXL. Una creación exclusiva con forma redondeada y un tacto aterciopelado para una aplicación suave y generosa en el rostro y el cuerpo, y un resultado de maquillaje ultranatural.Perfecta para realizar retoques durante el día."
   },
@@ -25,8 +25,17 @@
     "price": 50,
     "stock": 55,
     "category": "Maquillaje",
-    "code": "ghi",
+    "code": "1002",
     "thumbnails": "https://glowupuy.com/cdn/shop/files/Capturadepantalla2023-06-27150911.png?v=1687889502&width=650",
     "description": "Una máscara que ofrece un volumen inmediato desde la primera aplicación. Las pestañas se multiplican, cobran cuerpo y densidad. Revestidas de un color profundo, abren la mirada.La sinergia cepillo-fórmula permite un efecto de volumen intenso• El cepillo, que se ha desarrollado exclusivamente para CHANEL, esculpe el volumen gracias a sus discos superpuestos y orientados para un acabado óptimo.• La fórmula fluida de secado rápido permite crear un volumen a medida."
+  },
+  {
+    "id": "d6078e61-f8c3-42a6-a8ef-6ccaf086e499",
+    "title": "Necessaire",
+    "description": "Ideal para viaje",
+    "category": "Accesorios",
+    "code": "06",
+    "price": 23,
+    "stock": 2
   }
 ]

@@ -1,10 +1,15 @@
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
+const config = require("./src/config/config"); 
 const { paths, PORT } = require('./src/config/config');
 const http = require("http");
 const socketio = require("socket.io");
 const handlebars = require("express-handlebars");
 const logger = require("morgan");
+const mongoose = require("mongoose");
+
+
 
 
 const ProductManager = require("./src/managers/ProductManager");
@@ -19,6 +24,16 @@ const viewsRouter = require("./src/routes/views.routes");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+
+/*MONGOOSE*/
+
+mongoose
+  .connect(config.database.uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log(" Conectado a MongoDB Atlas"))
+  .catch((err) => console.error(" Error al conectar a MongoDB:", err));
 
 
 /*MIDDLEWARE*/
@@ -39,39 +54,26 @@ app.engine(
     defaultLayout: "main",
   })
 );
+const hbs = handlebars.create({
+  extname: ".hbs",
+  defaultLayout: "main",
+  helpers: {
+    eq: (a, b) => a === b,
+    multiply: (a, b) => a * b,
+  }
+});
 
+app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", paths.views);
 
 
 
-
-
-
-
-/*MULTER
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb)=> {
-    cb(null, "uploads/");
-      },
-
- filename: (req, file, cb)=> {
-  const originalName = `img-${req.params.id}-${file.originalname}`;
-  req.query.filename=originalName;
-  cb(null,originalName); 
-},     
-
-});
-const upload = multer({storage:storage});
-*/
- 
-
  /*rutas*/ 
  app.use("/", viewsRouter);
 app.use("/api/products", productsRouter)
 app.use("/api/carts",cartsRouter)
+
 
 
 const productManager = new ProductManager(path.join(__dirname, "src/data/products.json"));
